@@ -1,7 +1,7 @@
 $("#byname").keyup(function(){
  
     let name = $(this).val();
-    console.log(name);
+   
     getMealByName(name);
 })
 
@@ -11,7 +11,7 @@ $("#byname").keyup(function(){
 async function getMealByName(name){
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
     const data = await response.json();
-    console.log(data);
+    
     displayMals(data.meals)
     
 
@@ -23,7 +23,7 @@ async function getMealByName(name){
 $("#byfletter").keyup(function(){
  
     let letter = $(this).val();
-    console.log(letter);
+   
     getMealByFletter(letter);
 })
  async function getMealByFletter(fLetter){
@@ -39,12 +39,16 @@ function displayMals(data) {
 let box="";
   for(let i = 0; i < data.length; i++) 
  {
-  box+=` <div class="col-md-3  meal position-relative "data-mealid=${data[i].idMeal} ">
+  box+=` <div class="col-lg-3 col-md-4 col-sm-6 p-2 meal "data-mealid=${data[i].idMeal} ">
+  <div class="position-relative  overflow-hidden rounded-2">
   <img src="${data[i].strMealThumb
   }" class="w-100" alt="">
-  <div class="position-absolute d-flex flex-column justify-content-center text-center top-0 start-0 end-0 bottom-0  bg-danger opacity-75">
+  <div class="position-absolute layr text-black  d-flex flex-column justify-content-center text-center bg-info-subtle opacity-75">
       <h3>${data[i].strMeal}</h3>
       </div>
+
+                </div>
+ 
 </div>`
    
 
