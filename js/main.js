@@ -11,7 +11,7 @@ $(".nav-link").click(function (e) {
   
    if(section==="#home"){
    
-    console.log(section)
+   
   }
   else if(section==="#categories"){
     getAllCategoris();
@@ -19,40 +19,57 @@ $(".nav-link").click(function (e) {
   }
   else if(section==="#area"){
     getAllArea()
-    console.log(section)
+    
   }
   else if(section==="#ingredients"){
-    console.log(section)
+   
     getAllIngredients();
 
   }
- 
- 
-
 
 }
 
 )
 function displayFullDeails(details) {
   let ingediant="";
+ 
+ 
   for (let i = 1; i <= 20; i++) {
-    let t=`strIngredient${+i}`
-    let tst=`${details.strIngredienti}}`
-    console.log(tst)
-    let tst2=`details.strMeasure${+i}`
-    if (tst != "") {
+    let ingr=`strIngredient${i}`;
+    let meas=`strMeasure${i}`
+    
+    console.log(details[ingr])
+    
+    if (details[ingr]) {
       ingediant+= `<div class="alert alert-info fit-content p-1 m-2" role="alert">
-     ${tst2} ${tst}
+      ${details[ingr]}  ${details[meas]}
+    
          </div>`
 
-    }
+    }else break;
 
+  }
+  
+  let tags = details.strTags?.split(",")
+ 
+  if (!tags) {
+      tags = []
+  }
+
+  let tagsStr = ''
+  for (let i = 0; i < tags.length; i++) {
+      tagsStr += `
+      <div class="alert alert-info fit-content p-1 m-2" role="alert">
+      ${tags[i]}
+    
+         </div>`
+      
   }
   box =  `
   <div class="col-md-5 d-flex flex-column">
                 <img src="${details.strMealThumb}"class="w-100" alt="">
                 <h3 clas="text-center">
-                ${details.strMea}
+                ${details.strMeal}
                 </h3>
             </div>
             <div class="col-md-7 d-flex flex-column">
@@ -66,7 +83,11 @@ function displayFullDeails(details) {
                       
                 </div>
                 <h3>tags:</h3>
-                <div class="ms-4">
+                <div class="d-flex flex-wrap  g-2">
+                    ${tagsStr}
+                      
+                </div>
+                <div class="ms-4 mt-3">
                     <a href="${details.strSource}"class="btn btn-success"> sourse</a>
                     <a href="${details.strYoutube}"class="btn btn-danger">toutup</a>
 
@@ -82,7 +103,7 @@ $(".full-detal .row").html(box);
 async function getMaleById(id) {
   const respons = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
   const data = await respons.json();
-  console.log(data.meals[0])
+ 
   displayFullDeails(data.meals[0])
 
 
@@ -99,3 +120,5 @@ $(".row").on("click", ".meal", function (e) {
 
 
 });
+
+
