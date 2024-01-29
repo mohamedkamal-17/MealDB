@@ -13,8 +13,14 @@
     left:0;
     right: 0;
     bottom: 0;
+ transform: translateY(110%);
+ transition: transform 500ms;
     
 
+}
+
+.meal:hover .layr,.c-card:hover .layr{
+    transform: translateY(0%);
 }
 .body {
     overflow: hidden;
