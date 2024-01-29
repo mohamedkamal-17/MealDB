@@ -11,14 +11,14 @@ async function getAllIngredients() {
 }
 
 function displyAllIngredients(data) {
- console.log(9797)
+
     box = ""
    
     data.forEach(element => {
          console.log(element)
         box += `
 
-        <div class="col-md-3 i-card position-relative" data-ingredient-nam="${element.strIngredient}"  >
+        <div class="col-md-3 i-card position-relative overflow-hidden text-center" data-ingredient-nam="${element.strIngredient}"  >
         <i class="fa-solid fa-utensils fa-4x"></i>
        
         <h3> ${element.strIngredient}</h3>
@@ -39,7 +39,6 @@ $(".ingredients").on("click", ".i-card", function(){
 
     const ingredients = $(this).attr("data-ingredient-nam");
 
-    console.log(ingredients)
    
 
     getAllMealIngredients(ingredients);
@@ -55,7 +54,7 @@ async function getAllMealIngredients(ingredients){
         
     const respons = await fetch(`https:/www.themealdb.com/api/json/v1/1/filter.php?i=${ingredients}`)
     const data = await respons.json();
-    console.log(data)
+   
     displayMals(data.meals)
    
 
